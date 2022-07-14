@@ -12,7 +12,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :orders
+- has_many :trades
 
 ## items テーブル
 
@@ -30,7 +30,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one  :order
+- has_one  :trade
 - has_many :item_tags
 - has_many :tags, through: :photo_tags
 
@@ -69,7 +69,7 @@
 - belongs_to :user
 - belongs_to :item
 
-## orders テーブル
+## trades テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -92,8 +92,8 @@
 | address         | string     | null: false                    |
 | building        | string     |                                |
 | tel             | string     | null: false                    |
-| order           | references | null: false, foreign_key: true |
+| trade           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :order
+- belongs_to :trade
