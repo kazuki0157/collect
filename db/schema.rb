@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_14_085005) do
+ActiveRecord::Schema.define(version: 2022_07_14_090408) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2022_07_14_085005) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "shipping_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "zip", null: false
+    t.integer "ken_name_id", null: false
+    t.string "city_name", null: false
+    t.string "address", null: false
+    t.string "building"
+    t.string "tel", null: false
+    t.bigint "trade_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["trade_id"], name: "index_shipping_infos_on_trade_id"
+  end
+
   create_table "trades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
@@ -70,6 +83,7 @@ ActiveRecord::Schema.define(version: 2022_07_14_085005) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "shipping_infos", "trades"
   add_foreign_key "trades", "items"
   add_foreign_key "trades", "users"
 end
