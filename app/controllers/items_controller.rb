@@ -46,18 +46,16 @@ class ItemsController < ApplicationController
     end
   end
 
-  if current_user.id == @item.user_id
+  def destroy
     @item.destroy
     redirect_to root_path
-  else
-    redirect_to action: :index
   end
   
   def trade_new
     @item = Item.find(params[:item_id])
     @my_items = current_user.items
   end
-
+  
   private
 
   def item_params
