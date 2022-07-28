@@ -12,7 +12,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :orders
+- has_many :trades
 
 ## items テーブル
 
@@ -25,12 +25,13 @@
 | ken_name_id         | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
+| item                | references | null: true,  foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_many :comments
-- has_one  :order
+- has_one  :trade
 - has_many :item_tags
 - has_many :tags, through: :photo_tags
 
@@ -69,18 +70,27 @@
 - belongs_to :user
 - belongs_to :item
 
-## orders テーブル
+## trades テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| item       | references | null: false, foreign_key: true |
+| trade_item | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
 - belongs_to :item
-- has_one    :shipping_info
+- has_many :trade_item
+
+## trade_items テーブル
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| item1_id | references | null: false, foreign_key: true |
+| item2_id | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
 
 ## shipping_info テーブル
 
@@ -92,8 +102,9 @@
 | address         | string     | null: false                    |
 | building        | string     |                                |
 | tel             | string     | null: false                    |
-| order           | references | null: false, foreign_key: true |
+| trade           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :order
+- belongs_to :trade
+
