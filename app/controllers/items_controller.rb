@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:item_id])
     @my_items = current_user.items
   end
-  
+
   private
 
   def item_params

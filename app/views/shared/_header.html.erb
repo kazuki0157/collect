@@ -12,7 +12,7 @@
   <div class='nav'>
     <ul class='lists-left'>
       <li><%= link_to '出品', new_item_path, class: "category-list" %></li>
-      <li><%= link_to 'マイリスト', "#", class: "category-list" %></li>
+      <li><%= link_to 'マイアイテム', item_my_items_path(current_user.id), class: "category-list" %></li>
       <li><%= link_to 'お知らせ', "#", class: "category-list" %></li>
     </ul>
     <ul class='lists-right'>

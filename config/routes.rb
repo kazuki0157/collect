@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :items do
     get 'trade', to: 'items#trade_new'
   end
+  
+  resources :users, only: :show
+
 end
