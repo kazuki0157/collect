@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :item_id_params, only: :update
 
   def index
     @items = Item.order('created_at DESC')
-    #binding.pry
   end
 
   def new
@@ -30,10 +30,19 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to item_path
-    else
-      render :edit
+    if item_params[:item_id] then
+      binding.pry
+      if @item.update(item_params)
+        redirect_to item_path
+      else
+        render :edit
+      end
+    elsif item_id_params[:item_id] then
+      if @item.update(item_id_params)
+        redirect_to root_path
+      else
+        render :edit
+      end
     end
   end
 
@@ -42,6 +51,11 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
   
+  def trade_new
+    @item = Item.find(params[:item_id])
+    @my_items = current_user.items
+  end
+
   private
 
   def item_params
@@ -49,8 +63,11 @@ class ItemsController < ApplicationController
                                  :ken_name_id, :shipping_days_id).merge(user_id: current_user.id)
   end
 
+  def item_id_params
+    params.require(:item).permit(:item_id)
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end
-
 end

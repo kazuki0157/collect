@@ -2,6 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "items#index"
   resources :items do
-    resources :trades, only: [:index, :create]
+    get 'trade', to: 'items#trade_new'
   end
 end

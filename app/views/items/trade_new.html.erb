@@ -1,0 +1,57 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <h1 class='transaction-title-text'>
+      交換する商品
+    </h1>
+    <%# 購入内容の表示 %>
+    <div class='buy-item-info'>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
+        <h2 class='buy-item-text'>
+          <%= @item.product_name %>
+        </h2>
+      </div>
+    </div>
+
+    <%# 譲渡可能商品一覧の表示 %>
+    <%= form_with model: @item,local: true do |f| %>
+      <%# render 'shared/error_messages', model: f.object %>
+
+      <div class='my-item-form'>
+        <h1 class='info-input-haedline'>
+          譲渡可能な商品
+        </h1>
+  
+        <%# f.collection_select :trade_item, @my_items.all, :id, :product_name %>
+
+        <ul class='my-item-lists'>
+          <% @my_items.each do |item| %>
+            <li class='list'>
+              <div class='my-item-info'>
+                <%= image_tag item.image, class: 'my-item-img' %>
+              </div>
+              <div class='my-item-right-content'>
+                <h2 class='my-item-text'>
+                  <%= item.product_name %>
+                  <label><%= f.radio_button :item_id, item.id %></label>
+                </h2>
+              </div>
+            </li>
+          <% end %>
+        </ul>  
+      </div>
+
+      <%# binding.pry %>
+
+      <div class='buy-btn'>
+        <%= f.submit "決定" ,class:"buy-red-btn", id:"button" %>
+      </div>
+
+    <% end %>
+    <%# /譲渡可能商品一覧の表示 %> 
+
+  </div>
+</div>
+<%= render "shared/second-footer"%>
