@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     #get 'trade', to: 'items#trade_new'
     #get 'select', to: 'items#item_select'
     resources :relationships, only: [:index, :create, :destroy]
-    #  get 'select', to: 'relationships#item_select'
+    resources :orders, only: [:index, :create]
   end
 
   resources :users, only: :show

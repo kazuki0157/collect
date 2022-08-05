@@ -81,7 +81,19 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping_info
+
+## orders テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Association
+
+belongs_to :user
+belongs_to :relationships
+has_one :shipping_info
 
 ## shipping_info テーブル
 
