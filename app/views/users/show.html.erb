@@ -1,0 +1,32 @@
+<%= render "shared/header" %>
+
+  <%# 商品一覧 %>
+  <div class='item-contents'>
+    <h2 class='title'>出品商品</h2>
+    <div class="subtitle" >
+
+    </div>
+    <ul class='item-lists'>
+      <% @items.each do |item| %>
+        <h1 class='info-input-haedline'>
+
+          <li class='list'>
+            <%= link_to item_path(item.id) do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
+
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.product_name %>
+              </h3>
+            </div>
+            <% end %>
+          </li>
+        </h1>
+      <% end %>    
+    </ul>
+  </div>
+  <%# /商品一覧 %>
+
+<%= render "shared/footer" %>

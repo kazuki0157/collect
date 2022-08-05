@@ -38,10 +38,11 @@ class ItemsController < ApplicationController
         render :edit
       end
     elsif item_id_params[:item_id] then
-      if @item.update(item_id_params)
+      binding.pry
+      if @my_items.update(item_id_params)
         redirect_to root_path
       else
-        render :edit
+        render :trade_new
       end
     end
   end
@@ -51,6 +52,11 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
   
+  def item_select
+    @item = Item.find(params[:item_id])
+    @my_items = current_user.items
+  end
+
   def trade_new
     @item = Item.find(params[:item_id])
     @my_items = current_user.items
@@ -64,7 +70,8 @@ class ItemsController < ApplicationController
   end
 
   def item_id_params
-    params.require(:item).permit(:item_id)
+    params.require(:item).permit(:id)
+    @item = Item.find(params[:item_id])
   end
 
   def set_item

@@ -25,6 +25,7 @@
 | ken_name_id         | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
+| item                | references | null: true,  foreign_key: true  |
 
 ### Association
 
@@ -69,12 +70,12 @@
 - belongs_to :user
 - belongs_to :item
 
-## trades テーブル
+## relationships テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
+| trade_item    | references | null: false, foreign_key: true |
 
 ### Association
 
