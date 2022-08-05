@@ -11,9 +11,11 @@
   </div>
   <div class='nav'>
     <ul class='lists-left'>
-      <li><%= link_to '出品', new_item_path, class: "category-list" %></li>
-      <li><%= link_to 'マイリスト', "#", class: "category-list" %></li>
-      <li><%= link_to 'お知らせ', "#", class: "category-list" %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to '出品', new_item_path, class: "category-list" %></li>
+        <li><%= link_to '出品商品', user_path(current_user.id), class: "category-list" %></li>
+        <li><%= link_to 'お知らせ', "#", class: "category-list" %></li>
+      <% end %>
     </ul>
     <ul class='lists-right'>
       <% if user_signed_in? %>

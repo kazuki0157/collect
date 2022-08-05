@@ -1,0 +1,42 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+
+    <%# 譲渡可能商品一覧の表示 %>
+    <%= form_with model: @item,local: true do |f| %>
+      <%# render 'shared/error_messages', model: f.object %>
+
+      <div class='my-item-form'>
+        <h1 class='info-input-haedline'>
+          譲渡可能な商品
+        </h1>
+        <ul class='my-item-lists'>
+          <% @my_items.each do |item| %>
+            <li class='list'>
+              <div class='my-item-info'>
+                <%= image_tag item.image, class: 'my-item-img' %>
+              </div>
+              <div class='my-item-right-content'>
+                <h2 class='my-item-text'>
+                  <%= item.product_name %>
+                  <label><%= f.radio_button :trade_item_id, item.id %></label>
+                </h2>
+              </div>
+            </li>
+          <% end %>
+        </ul>  
+      </div>
+
+      <%= hidden_field_tag :item_id, value: @trade_item.id %>
+
+      <div class='buy-btn'>
+        <%= f.submit "決定" ,class:"buy-red-btn", id:"button" %>
+      </div>
+
+    <% end %>
+    <%# /譲渡可能商品一覧の表示 %> 
+
+  </div>
+</div>
+<%= render "shared/second-footer"%>

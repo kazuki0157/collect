@@ -25,7 +25,7 @@
 | ken_name_id         | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
-| item                | references | null: true,  foreign_key: true |
+| item                | references | null: true,  foreign_key: true  |
 
 ### Association
 
@@ -70,27 +70,18 @@
 - belongs_to :user
 - belongs_to :item
 
-## trades テーブル
+## relationships テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| item       | references | null: false, foreign_key: true |
-| trade_item | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- has_many :trade_item
-
-## trade_items テーブル
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| item1_id | references | null: false, foreign_key: true |
-| item2_id | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| item          | references | null: false, foreign_key: true |
+| trade_item    | references | null: false, foreign_key: true |
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item
+- has_one    :shipping_info
 
 ## shipping_info テーブル
 
@@ -107,4 +98,3 @@
 ### Association
 
 - belongs_to :trade
-
