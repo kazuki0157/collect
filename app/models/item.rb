@@ -2,10 +2,31 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
 
-  has_many :relationships, dependent: :destroy
-  has_many :tradeings, through: :relationships, source: :trade_item
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'trade_item_id', dependent: :destroy
-  has_many :tradeing_items, through: :reverse_of_relationships, source: :item
+  #has_many :relationships, dependent: :destroy
+  #has_many :tradeings, through: :relationships, source: :trade_item
+  #has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'trade_item_id', dependent: :destroy
+  #has_many :tradeing_items, through: :reverse_of_relationships, source: :item
+
+  #has_many :item_relationships, class_name: 'Relationship', foreign_key: 'trade_item_id', dependent: :destroy
+  #has_many :trade_item_relationships, class_name: 'Relationship', foreign_key: 'item_id', dependent: :destroy
+  #has_many :items, through: :item_relationships
+  #has_many :trade_items, through: :trade_item_relationships
+
+  has_many :item_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'trade_item_id',
+           dependent: :destroy,
+           inverse_of: :item
+
+  has_many :trad_item_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'item_id',
+           dependent: :destroy,
+           inverse_of: :trade_item
+
+  has_many :items, through: :item_relationships
+  has_many :trade_items, through: :trad_item_relationships
+
 
   validates :image, presence: true
   validates :product_name, presence: true
