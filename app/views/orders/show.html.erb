@@ -3,29 +3,24 @@
 <%# 商品の概要 %>
 <div class="item-show">
   <div class="item-box">
-    <h2 class="name">
-      <%= @item.product_name %>
-    </h2>
+
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
     </div>
 
-    <% if current_user.id == @item.user_id %>
-      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-    <% else %>
-      <%= link_to "交換", item_relationships_path(@item.id) ,class:"item-red-btn"%>
-    <% end %>
-
-    <div class="item-explain-box">
-      <span><%= @item.description %></span>
-    </div>
     <table class="detail-table">
       <tbody>
         <tr>
+          <th class="detail-item">商品名</th>
+          <td class="detail-value"><%= @item.product_name %></td>
+        </tr>
+        <tr>
           <th class="detail-item">出品者</th>
           <td class="detail-value"><%= @item.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">説明</th>
+          <td class="detail-value"><%= @item.description %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
@@ -45,6 +40,8 @@
         </tr>
       </tbody>
     </table>
+
+    <%= link_to "交換", item_relationships_path(@item.id) ,class:"item-red-btn"%>
 
   </div>
   <%# /商品の概要 %>

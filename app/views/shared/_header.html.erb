@@ -14,7 +14,7 @@
       <% if user_signed_in? %>
         <li><%= link_to '出品', new_item_path, class: "category-list" %></li>
         <li><%= link_to '出品商品', user_path(current_user.id), class: "category-list" %></li>
-        <li><%= link_to 'お知らせ', item_orders_path(current_user.id), class: "category-list" %></li>
+        <li><%= link_to '商品交換', item_orders_path(current_user.id), class: "category-list" %></li>
       <% end %>
     </ul>
     <ul class='lists-right'>
