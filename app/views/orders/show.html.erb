@@ -1,0 +1,49 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <div class="item-img-content">
+      <%= image_tag @item.image ,class:"item-box-img" %>
+    </div>
+
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">商品名</th>
+          <td class="detail-value"><%= @item.product_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">出品者</th>
+          <td class="detail-value"><%= @item.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">説明</th>
+          <td class="detail-value"><%= @item.description %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">商品の状態</th>
+          <td class="detail-value"><%= @item.condition.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">配送料の負担</th>
+          <td class="detail-value"><%= @item.pay_for_shipping.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送元の地域</th>
+          <td class="detail-value"><%= @item.ken_name.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送日の目安</th>
+          <td class="detail-value"><%= @item.shipping_days.name %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <%= form_with model: @order, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+      <%= hidden_field_tag :relationship_id, @relationship.id %>
+      <div class='buy-btn'>
+        <%= f.submit "交換" ,class:"buy-red-btn", id:"button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
