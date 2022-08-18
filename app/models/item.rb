@@ -18,7 +18,6 @@ class Item < ApplicationRecord
   has_many :items, through: :item_relationships
   has_many :trade_items, through: :trad_item_relationships
 
-
   validates :image, presence: true
   validates :product_name, presence: true
   validates :description, presence: true
@@ -34,14 +33,11 @@ class Item < ApplicationRecord
   belongs_to :shipping_days
 
   def trade(other_item)
-    unless self == other_item
-      self.relationships.find_or_create_by(trade_item_id: other_item.id)
-    end
+    relationships.find_or_create_by(trade_item_id: other_item.id) unless self == other_item
   end
 
   def untrade(other_item)
-    relationship = self.relationships.find_by(tradeitem_id: other_item.id)
+    relationship = relationships.find_by(tradeitem_id: other_item.id)
     relationship.destroy if relationship
   end
-
 end

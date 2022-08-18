@@ -24,20 +24,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 
   def update
-    if item_params[:item_id] then
+    if item_params[:item_id]
       binding.pry
       if @item.update(item_params)
         redirect_to item_path
       else
         render :edit
       end
-    elsif item_id_params[:item_id] then
+    elsif item_id_params[:item_id]
       binding.pry
       if @my_items.update(item_id_params)
         redirect_to root_path

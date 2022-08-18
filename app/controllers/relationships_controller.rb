@@ -20,6 +20,7 @@ class RelationshipsController < ApplicationController
   end
 
   private
+
   def relationship_params
     params.permit(:item_id, :trade_item_id)
   end

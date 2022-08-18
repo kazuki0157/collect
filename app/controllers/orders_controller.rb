@@ -21,11 +21,12 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path
-      #render :show
+      # render :show
     end
   end
-  
+
   private
+
   def order_params
     params.permit(:relationship_id)
   end
