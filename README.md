@@ -11,8 +11,6 @@
 ### Association
 
 - has_many :items
-- has_many :comments
-- has_many :trades
 
 ## items テーブル
 
@@ -29,46 +27,20 @@
 
 ### Association
 
+- has_one_attached :image
 - belongs_to :user
-- has_many :comments
-- has_one  :trade
-- has_many :item_tags
-- has_many :tags, through: :photo_tags
+- has_one :order
+- has_many :item_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'trade_item_id',
+           dependent: :destroy,
+           inverse_of: :item
 
-## tags テーブル
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-
-### Association
-
-- has_many :item_tags
-- has_many :items, through: :item_tags
-
-## item_tags テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| item_id | references | null: false, foreign_key: true |
-| tag_id  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :tag
-
-## comments テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| content   | text       | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| item      | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :item
+- has_many :trad_item_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'item_id',
+           dependent: :destroy,
+           inverse_of: :trade_item
 
 ## relationships テーブル
 
@@ -79,34 +51,17 @@
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
+- belongs_to :item, class_name: 'Item'
+- belongs_to :trade_item, class_name: 'Item'
+- has_one :order
 
 ## orders テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| item   | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| relationship | references | null: false, foreign_key: true |
 
 ### Association
 
-belongs_to :user
-belongs_to :relationships
-has_one :shipping_info
-
-## shipping_info テーブル
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| zip             | string     | null: false                    |
-| ken_name_id     | integer    | null: false                    |
-| city_name       | string     | null: false                    |
-| address         | string     | null: false                    |
-| building        | string     |                                |
-| tel             | string     | null: false                    |
-| trade           | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :trade
+- belongs_to :relationship
+- validates :relationship_id
