@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
   belongs_to :relationship
-  validates :relationship_id
+  validate :relationship_id
 end
