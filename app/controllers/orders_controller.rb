@@ -16,8 +16,6 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      binding.pry
-
       redirect_to root_path
     else
       redirect_to root_path
